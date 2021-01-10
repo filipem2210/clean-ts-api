@@ -22,16 +22,14 @@ const makeAddAccount = (): AddAccount => {
   return new AddAccountStub()
 }
 
-const makeFakeRequest = (): HttpRequest => {
-  return {
-    body: {
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password',
-      passwordConfirmation: 'any_password'
-    }
+const makeFakeRequest = (): HttpRequest => ({
+  body: {
+    name: 'any_name',
+    email: 'any_email@mail.com',
+    password: 'any_password',
+    passwordConfirmation: 'any_password'
   }
-}
+})
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
