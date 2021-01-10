@@ -1,18 +1,15 @@
 import { LogControllerDecorator } from './log'
 import { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols'
-import { serverError } from '../../presentation/helpers/http-helper'
+import { ok, serverError } from '../../presentation/helpers/http-helper'
 import { LogErrorRepository } from '../../data/protocols/log-error-repository'
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      const httpResponse: HttpResponse = {
-        statusCode: 200,
-        body: {
-          name: 'Filipe Moraes',
-          email: 'filipemoraes2210@gmail.com'
-        }
-      }
+      const httpResponse: HttpResponse = ok({
+        name: 'Filipe Moraes',
+        email: 'filipemoraes2210@gmail.com'
+      })
       return httpResponse
     }
   }
@@ -71,13 +68,10 @@ describe('LogController Decorator', () => {
       }
     }
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual({
-      statusCode: 200,
-      body: {
-        name: 'Filipe Moraes',
-        email: 'filipemoraes2210@gmail.com'
-      }
-    })
+    expect(httpResponse).toEqual(ok({
+      name: 'Filipe Moraes',
+      email: 'filipemoraes2210@gmail.com'
+    }))
   })
 
   test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
