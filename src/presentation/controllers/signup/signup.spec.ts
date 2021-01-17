@@ -40,18 +40,18 @@ const makeFakeAccount = (): AccountModel => ({
 
 interface SutTypes {
   sut: SignUpController
-  addAccountStub: AddAccount
   validationStub: Validation
+  addAccountStub: AddAccount
 }
 
 const makeSut = (): SutTypes => {
-  const addAccountStub = makeAddAccount()
   const validationStub = makeValidation()
-  const sut = new SignUpController(addAccountStub, validationStub)
+  const addAccountStub = makeAddAccount()
+  const sut = new SignUpController(validationStub, addAccountStub)
   return {
     sut,
-    addAccountStub,
-    validationStub
+    validationStub,
+    addAccountStub
   }
 }
 

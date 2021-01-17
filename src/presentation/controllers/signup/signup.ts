@@ -3,8 +3,8 @@ import { badRequest, ok, serverError } from '../../helpers/http-helper'
 
 export class SignUpController implements Controller {
   constructor (
-    private readonly addAccount: AddAccount,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly addAccount: AddAccount
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
